@@ -210,3 +210,55 @@ end)
 AimLoop()
 
 print("[ICE HUB V2] Loaded! Keys: [A]=Aimbot  [G]=Lock  [V]=Unlock  [F]=AutoLock  [Z]=Mode  [U]=Beam")
+-- HUD UI (shows keys / status)
+local function CreateStatusHUD()
+    local screenGui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
+    local statusLabel = Instance.new("TextLabel", screenGui)
+    statusLabel.Name = "IceHubStatusHUD"
+    statusLabel.Size = UDim2.new(0, 600, 0, 25)
+    statusLabel.Position = UDim2.new(0, 10, 0, 35)
+    statusLabel.BackgroundTransparency = 0.5
+    statusLabel.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+    statusLabel.TextColor3 = Color3.fromRGB(0, 200, 255)
+    statusLabel.Font = Enum.Font.SourceSansBold
+    statusLabel.TextSize = 20
+    statusLabel.TextXAlignment = Enum.TextXAlignment.Left
+    statusLabel.Text = ""
+
+    -- Update loop
+    RunService.RenderStepped:Connect(function()
+        local tgtName = Settings.LockTarget and Settings.LockTarget.Name or "None"
+        local text = string.format("Aimbot: %s   | Mode: %s   | AutoLock: %s   | Target: %s",
+            tostring(Settings.Enabled), Settings.Mode, tostring(Settings.AutoLock), tgtName)
+        statusLabel.Text = text
+    end)
+end
+
+-- Run the HUD
+CreateStatusHUD()
+-- HUD with Keys Help
+local function CreateKeysHelp()
+    local screenGui = Instance.new("ScreenGui", LocalPlayer:WaitForChild("PlayerGui"))
+    local keysLabel = Instance.new("TextLabel", screenGui)
+    keysLabel.Name = "IceHubKeysHUD"
+    keysLabel.Size = UDim2.new(0, 300, 0, 150)
+    keysLabel.Position = UDim2.new(0, 10, 0, 65)
+    keysLabel.BackgroundTransparency = 0.5
+    keysLabel.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+    keysLabel.TextColor3 = Color3.fromRGB(0, 200, 255)
+    keysLabel.Font = Enum.Font.SourceSansBold
+    keysLabel.TextSize = 18
+    keysLabel.TextXAlignment = Enum.TextXAlignment.Left
+    keysLabel.TextYAlignment = Enum.TextYAlignment.Top
+
+    keysLabel.Text = "[ICE HUB V2] KEYS:\n" ..
+                     "[A] Toggle Aimbot\n" ..
+                     "[G] Lock Target\n" ..
+                     "[V] Unlock Target\n" ..
+                     "[F] Toggle AutoLock\n" ..
+                     "[Z] Switch Mode (Bullet/Mag/Dive)\n" ..
+                     "[U] Toggle Beam"
+end
+
+-- Run the keys HUD
+CreateKeysHelp()
