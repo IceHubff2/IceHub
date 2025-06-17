@@ -101,17 +101,11 @@ local function CreateUI()
         return btn
     end
 
-    -- BUTTONS (callbacks added later in part 4)
-    createButton("ToggleAimbot", "Toggle AimBot", function() end)
-    createButton("ChangeMode", "Change Mode", function() end)
-    createButton("ToggleAutoThrow", "Toggle AutoThrow", function() end)
-    createButton("LockTarget", "Lock Closest Target", function() end)
-    createButton("UnlockTarget", "Unlock Target", function() end)
-    createButton("Profile1", "Load Profile 1", function() end)
-    createButton("Profile2", "Load Profile 2", function() end)
-    createButton("Profile3", "Load Profile 3", function() end)
-    createButton("SaveProfiles", "Save Profiles", function() end)
-    createButton("LoadProfiles", "Load Profiles", function() end)
+    createButton("ToggleAimbot", "Toggle AimBot", function()
+    Settings.Enabled = not Settings.Enabled
+    print("[ICE HUB] Aimbot: " .. tostring(Settings.Enabled))
+end)
+
 end
 -- PART 3/5 - TARGET FINDER + PROFILE APPLY + ARC PREDICTION
 
